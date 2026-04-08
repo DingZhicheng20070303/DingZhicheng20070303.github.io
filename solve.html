@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>一元二次方程求解器</title>
+</head>
+<body>
+    <h1>一元二次方程 ax² + bx + c = 0 求解</h1>
+    <p>请依次输入系数 a, b, c（假设 a > 0, delta ≥ 0）</p>
+    <script>
+        // (1) 使用 prompt 获取三个系数
+        let aInput = prompt("请输入系数 a (a > 0)");
+        let bInput = prompt("请输入系数 b");
+        let cInput = prompt("请输入系数 c");
+
+        // (2) 使用 parseInt 转换为整数（若需要浮点数可使用 parseFloat，但这里按要求用 parseInt）
+        // 注意：parseInt 会忽略小数部分，如果用户输入小数，会导致精度丢失。
+        let a = parseInt(aInput);
+        let b = parseInt(bInput);
+        let c = parseInt(cInput);
+
+        // 简单验证是否为有效数字
+        if (isNaN(a) || isNaN(b) || isNaN(c)) {
+            alert("输入无效，请确保输入的是数字。");
+            console.log("输入无效：非数字");
+        } else if (a <= 0) {
+            alert("假设 a > 0，但您输入的 a = " + a + "，可能导致除零或非二次方程。");
+            console.log("a 应大于 0，实际 a =", a);
+        } else {
+            // (3) 计算判别式 delta
+            let delta = b * b - 4 * a * c;
+            if (delta < 0) {
+                alert("判别式 delta = " + delta + " < 0，但题目假设 delta >= 0。实际无实数解。");
+                console.log("delta =", delta, "< 0，无实数根");
+            } else {
+                // (4) 计算两个根
+                let x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                let x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                // (5) 使用 alert 告知用户
+                alert("方程的解为：\nx1 = " + x1 + "\nx2 = " + x2);
+                // (6) 使用 console.log 输出
+                console.log("对于方程: " + a + "x² + " + b + "x + " + c + " = 0");
+                console.log("delta =", delta);
+                console.log("x1 =", x1);
+                console.log("x2 =", x2);
+            }
+        }
+    </script>
+</body>
+</html>
